@@ -1,6 +1,6 @@
 # Examen final — Robótica Industrial · Tema A: ABB IRB 1400
 
-**Análisis de velocidad: Jacobiano geométrico y movimiento en línea recta**
+**Análisis de velocidad: Jacobiano de velocidad y movimiento en línea recta**
 
 | | |
 |---|---|
@@ -35,26 +35,22 @@
 
 ## Enunciado
 
-En el ABB IRB 1400 (6 GDL), con la configuración articular **q₀** y el punto objetivo **P_d = p₀ + Δp** que genera su carné, determine:
+En el ABB IRB 1400 (6 GDL), con la configuración articular **q₀** y el punto objetivo **P_d = O₀ + Δp** que genera su carné, determine:
 
-1. **(0.4 Pts)** La tabla de parámetros DH y la función `dh()` (matriz homogénea DH estándar). Con ellas se obtiene ⁰₆T(q₀).
-2. **(0.8 Pts)** El jacobiano geométrico **J(q)** de 6×6 (función `jacobiano()`), construido columna por columna a partir de **z₍ᵢ₋₁₎** y **p₍ᵢ₋₁₎**:
-   Jᵢ = [ z₍ᵢ₋₁₎ × (pₙ − p₍ᵢ₋₁₎) ; z₍ᵢ₋₁₎ ]
-3. **(0.3 Pts)** Verificar la parte lineal de J(q₀) con un jacobiano numérico por diferencias finitas sobre la posición de ⁰₆T (h = 1e‑6). Reportar el error máximo.
-4. **(0.7 Pts)** Mover el efector final en **línea recta** desde p₀ hasta P_d en T = 2 s, **manteniendo la orientación**, usando **q̇ = J⁻¹ẋ** e integrando con Euler (δt = 0.01 s). Graficar la trayectoria deseada frente a la obtenida sobre el robot.
+1. **(0.4 Pts)** La matriz de parámetros DH (función `DH_robot(q)`, filas 1–6 para las articulaciones y fila 7 para la brida) y la matriz de transformación homogénea ⁰ₙT(q₀) (función `cinematica_directa`).
+2. **(0.8 Pts)** El Jacobiano de velocidad **J(q)** de 6×6 (función `jacobiano`), construido columna por columna con la **ec. (27)**:
+   J_vi = z_i × (O_n − O_i),  J_ωi = z_i
+   donde z_i y O_i se obtienen de ⁰ᵢT.
+3. **(0.3 Pts)** Verificar la parte lineal de J(q₀) con la **ec. (22)**, J_vi = ∂ ⁰ₙO / ∂q_i, calculando la derivada **numéricamente**: mover cada articulación un valor pequeño h = 1e‑6 rad y medir cuánto cambia la posición del efector. Reportar el error máximo entre ambos.
+4. **(0.7 Pts)** Mover el efector final en **línea recta** desde O₀ hasta P_d en T = 2 s, **manteniendo la orientación**, usando **q̇ = J⁻¹ẋ** e integrando con Euler (δt = 0.01 s). Graficar la trayectoria deseada frente a la obtenida sobre el robot.
 5. **(0.3 Pts)** Graficar q(t) y q̇(t), completar los límites de la hoja de datos y concluir si algún eje se sale de su rango o supera su velocidad máxima.
-
-## Respuestas en Moodle
-
-Ejecute su código y escriba en el examen de Moodle los valores que imprime:
-
-- Posición inicial **p₀** = ⁰₆T(q₀)(1:3,4) en mm.
-- **Posición final obtenida** y **error final respecto a P_d** en mm.
-- **Velocidad articular máxima** (°/s) y el eje en que ocurre.
 
 ## Entrega
 
 Suba a Moodle una carpeta comprimida con:
 
-1. **`AnlVel_NNAA.png`**: captura de pantalla completa donde se vea MATLAB con el código y la salida (incluida la línea con su carné, fecha y hora), y la sesión activa de Moodle con el examen y su usuario.
-2. **`AnlVel_NNAA.m`**: su archivo completo. Debe ejecutarse sin errores y reproducir los valores que escribió en Moodle.
+1. **`AnlVel_NNAA.png`**: captura de pantalla completa donde se evidencie:
+   - La interfaz de MATLAB con el código solución (porción más relevante).
+   - La **Command Window** con la salida del programa: la línea con su carné, nombre, fecha y hora, la posición inicial **O₀**, la posición final obtenida, el error final, el error ec.(27) vs ec.(22) y la velocidad máxima por eje.
+   - La sesión activa de Moodle donde se evidencie el examen y el usuario.
+2. **`AnlVel_NNAA.m`**: su archivo completo. Debe ejecutarse sin errores y reproducir los valores de la captura.
