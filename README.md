@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | Duración | **55 minutos** |
-| Valor | **2.5 Pts** |
+| Valor | **2.0 Pts** |
 | Herramienta | MATLAB, **solo código propio** (no se permite ninguna toolbox: Robotics System Toolbox, Peter Corke, Symbolic, etc.) |
 | Archivo base | [`AnlVel_NNAA.m`](AnlVel_NNAA.m) |
 
@@ -37,12 +37,12 @@
 
 En el ABB IRB 1400 (6 GDL), con la configuración articular **q₀** y el punto objetivo **P_d = O₀ + Δp** que genera su carné, determine:
 
-1. **(0.4 Pts)** La matriz de parámetros DH (función `DH_robot(q)`, filas 1–6 para las articulaciones y fila 7 para la brida) y la matriz de transformación homogénea ⁰ₙT(q₀) (función `cinematica_directa`).
-2. **(0.8 Pts)** El Jacobiano de velocidad **J(q)** de 6×6 (función `jacobiano`), construido columna por columna con la **ec. (27)**:
+1. **(0.3 Pts)** La matriz de parámetros DH (función `DH_robot(q)`, filas 1–6 para las articulaciones y fila 7 para la brida) y la matriz de transformación homogénea ⁰ₙT(q₀) (función `cinematica_directa`).
+2. **(0.6 Pts)** El Jacobiano de velocidad **J(q)** de 6×6 (función `jacobiano`), construido columna por columna con la **ec. (27)**:
    J_vi = z_i × (O_n − O_i),  J_ωi = z_i
    donde z_i y O_i se obtienen de ⁰ᵢT.
 3. **(0.3 Pts)** Verificar la parte lineal de J(q₀) con la **ec. (22)**, J_vi = ∂ ⁰ₙO / ∂q_i, calculando la derivada **numéricamente**: mover cada articulación un valor pequeño h = 1e‑6 rad y medir cuánto cambia la posición del efector. Reportar el error máximo entre ambos.
-4. **(0.7 Pts)** Mover el efector final en **línea recta** desde O₀ hasta P_d en T = 2 s, **manteniendo la orientación**, usando **q̇ = J⁻¹ẋ** e integrando con Euler (δt = 0.01 s). Graficar la trayectoria deseada frente a la obtenida sobre el robot.
+4. **(0.5 Pts)** Mover el efector final en **línea recta** desde O₀ hasta P_d en T = 2 s, **manteniendo la orientación**, usando **q̇ = J⁻¹ẋ** e integrando con Euler (δt = 0.01 s). Graficar la trayectoria deseada frente a la obtenida sobre el robot.
 5. **(0.3 Pts)** Graficar q(t) y q̇(t), completar los límites de la hoja de datos y concluir si algún eje se sale de su rango o supera su velocidad máxima.
 
 ## Entrega
