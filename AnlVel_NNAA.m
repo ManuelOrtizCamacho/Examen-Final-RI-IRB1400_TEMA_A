@@ -56,7 +56,7 @@ Jn = zeros(3,6);
 for i = 1:6
     dq = zeros(6,1);  dq(i) = h;
     Ti = fk(q0 + dq, DH);
-    % TODO: columna i del Jacobiano lineal por diferencias finitas
+    % TODO: columna i del Jacobiano lineal
     % Jn(:,i) = ...
 end
 error_max = max(max(abs(J0(1:3,:) - Jn)));
